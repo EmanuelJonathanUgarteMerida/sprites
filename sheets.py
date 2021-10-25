@@ -17,12 +17,23 @@ width = 100
 height = 100
 
 imagenes = []
+imagenes_correr=[]
 
 for frame in range(4):
     imagenes.append(create_image_from_sheet(sprite_sheet, frame, (x,y),width, height))
-image=imagenes[0]
+imagen=imagenes[0]
 contador=0
-pos=0    
+pos=0
+
+x=434
+y=0
+width=101
+height=116
+for frame in range(6):
+    imagenes_correr.append(create_image_from_sheet(sprite_sheet,frame,(x,y),width,height))
+image_correr=imagenes_correr[0]   
+contador_c=0
+pos_c=0
 game_over = False
 
 while not game_over:
@@ -36,16 +47,27 @@ while not game_over:
     if contador==8:
         pos+=1
         if pos < len(imagenes):
-            image=imagenes[pos]
+            imagen=imagenes[pos]
         else:
             pos=0
-            image=imagenes[pos]
+            imagen=imagenes[pos]
         contador=0
     else:
         contador+=1
 
+    if contador_c==8:
+        pos_c+=1
+        if pos_c < len(imagenes_correr):
+            image_correr=imagenes_correr[pos_c]
+        else:
+            pos_c=0
+            image_correr=imagenes_correr[pos_c]
+        contador_c=0
+    else:
+        contador_c+=1
 
-    pantalla.fill((0, 0, 0))
-    pantalla.blit(image,image.get_rect().center)
 
+    pantalla.fill((255, 255, 255))
+    pantalla.blit(imagen,imagen.get_rect().center)
+    pantalla.blit(image_correr,(200,200))
     pg.display.flip()
